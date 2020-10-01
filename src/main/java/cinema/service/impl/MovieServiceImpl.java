@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService {
     @Inject
-    MovieDao movieDao;
+    private MovieDao movieDao;
 
     public Movie add(Movie movie) {
         return movieDao.add(movie);

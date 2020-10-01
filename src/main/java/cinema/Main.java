@@ -13,6 +13,10 @@ public class Main {
         movie1.setTitle("Mad Max: Fury Road");
         movie1.setDescription("Cool film");
         movieService.add(movie1);
+        Movie movie2 = new Movie();
+        movie2.setTitle("Interstellar");
+        movie2.setDescription("Science fiction");
+        movieService.add(movie2);
         movieService.getAll().stream().forEach(System.out::println);
     }
 }
