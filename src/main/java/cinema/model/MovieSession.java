@@ -1,7 +1,6 @@
 package cinema.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,9 +12,9 @@ public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Movie movie;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private CinemaHall cinemaHall;
     private LocalDateTime showTime;
 
