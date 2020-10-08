@@ -1,5 +1,6 @@
 package cinema;
 
+import cinema.exceptions.AuthenticationException;
 import cinema.lib.Injector;
 import cinema.model.CinemaHall;
 import cinema.model.Movie;
@@ -47,8 +48,12 @@ public class Main {
                 .getInstance(AuthenticationService.class);
         authenticationService.register("maryna.voloshyna.11@gmail.com",
                 "qwerty123");
-        System.out.println(authenticationService
-                .login("maryna.voloshyna.11@gmail.com",
-                        "qwerty123"));
+        try {
+            System.out.println(authenticationService
+                    .login("maryna.voloshyna.11@gmail.com",
+                            "qwerty123"));
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+        }
     }
 }

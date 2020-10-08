@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class HashUtil {
-    private static final String hashAlgName = "SHA-512";
+    private static final String HASH_ALG_NAME = "SHA-512";
 
     public static byte[] getSalt() {
         SecureRandom random = new SecureRandom();
@@ -17,14 +17,14 @@ public class HashUtil {
     public static String hashPassword(String password, byte[] salt) {
         StringBuilder hashedPassword = new StringBuilder();
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance(hashAlgName);
+            MessageDigest messageDigest = MessageDigest.getInstance(HASH_ALG_NAME);
             messageDigest.update(salt);
             byte[] digest = messageDigest.digest(password.getBytes());
             for (byte b : digest) {
                 hashedPassword.append(String.format("%02x", b));
             }
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Impossible to encode your password");
+            throw new RuntimeException("Impossible to encode your password", e);
         }
         return hashedPassword.toString();
     }

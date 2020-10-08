@@ -26,8 +26,8 @@ public class UserDaoImpl implements UserDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert user Entity with id = "
-                    + user.getId(), e);
+            throw new DataProcessingException("Can't insert user Entity with email = "
+                    + user.getEmail(), e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,7 +43,8 @@ public class UserDaoImpl implements UserDao {
             findByEmailQuery.setParameter("email", email);
             return findByEmailQuery.uniqueResultOptional();
         } catch (Exception e) {
-            throw new RuntimeException("Can't find available account", e);
+            throw new DataProcessingException("Can't find available account with email = "
+                    + email, e);
         }
     }
 }
