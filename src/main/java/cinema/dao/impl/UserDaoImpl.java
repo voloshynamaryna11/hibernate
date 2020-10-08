@@ -12,7 +12,6 @@ import org.hibernate.query.Query;
 
 @Dao
 public class UserDaoImpl implements UserDao {
-
     @Override
     public User add(User user) {
         Transaction transaction = null;
@@ -42,7 +41,7 @@ public class UserDaoImpl implements UserDao {
             Query<User> findByEmailQuery = session.createQuery("FROM User "
                     + "WHERE email = :email", User.class);
             findByEmailQuery.setParameter("email", email);
-            return Optional.ofNullable(findByEmailQuery.uniqueResult());
+            return findByEmailQuery.uniqueResultOptional();
         } catch (Exception e) {
             throw new RuntimeException("Can't find available account", e);
         }

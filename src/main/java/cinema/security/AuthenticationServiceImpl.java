@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-
     @Inject
     private UserService userService;
 
@@ -28,11 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public User register(String email, String password) {
         User user = new User();
         user.setEmail(email);
-        byte[] salt = HashUtil.getSalt();
-        String saltedPassword = HashUtil.hashPassword(password, salt);
-        user.setPassword(saltedPassword);
-        user.setSalt(salt);
-        userService.add(user);
-        return user;
+        user.setPassword(password);
+        return userService.add(user);
     }
 }
