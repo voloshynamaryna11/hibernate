@@ -1,9 +1,11 @@
 package cinema;
 
+import cinema.exceptions.AuthenticationException;
 import cinema.lib.Injector;
 import cinema.model.CinemaHall;
 import cinema.model.Movie;
 import cinema.model.MovieSession;
+import cinema.security.AuthenticationService;
 import cinema.service.CinemaHallService;
 import cinema.service.MovieService;
 import cinema.service.MovieSessionService;
@@ -42,5 +44,16 @@ public class Main {
         movieSessionService.add(movieSession);
         LocalDate localDate = LocalDate.of(2020, 10, 8);
         System.out.println(movieSessionService.findAvailableSessions(1L, localDate));
+        AuthenticationService authenticationService = (AuthenticationService) injector
+                .getInstance(AuthenticationService.class);
+        authenticationService.register("maryna.voloshyna.11@gmail.com",
+                "qwerty123");
+        try {
+            System.out.println(authenticationService
+                    .login("maryna.voloshyna.11@gmail.com",
+                            "qwerty123"));
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+        }
     }
 }
