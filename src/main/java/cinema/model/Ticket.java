@@ -14,7 +14,7 @@ public class Ticket {
     private Long id;
     @ManyToOne
     private MovieSession movieSession;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private User user;
 
     public Long getId() {
