@@ -5,6 +5,7 @@ import cinema.lib.Injector;
 import cinema.model.CinemaHall;
 import cinema.model.Movie;
 import cinema.model.MovieSession;
+import cinema.model.ShoppingCart;
 import cinema.model.User;
 import cinema.security.AuthenticationService;
 import cinema.service.CinemaHallService;
@@ -68,6 +69,10 @@ public class Main {
                 .getInstance(ShoppingCartService.class);
         shoppingCartService.addSession(movieSession,
                 authenticationService.login(user1.getEmail(), user1.getPassword()));
-        System.out.println(shoppingCartService.getByUser(user1));
+        ShoppingCart shoppingCart = shoppingCartService
+                .getByUser(userService.findByEmail(user1.getEmail()).get());
+        System.out.println(shoppingCart);
+        shoppingCartService.clear(shoppingCart);
+        System.out.println(shoppingCart);
     }
 }

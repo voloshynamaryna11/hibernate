@@ -9,7 +9,6 @@ import cinema.model.ShoppingCart;
 import cinema.model.Ticket;
 import cinema.model.User;
 import cinema.service.ShoppingCartService;
-import java.util.List;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -26,7 +25,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ticket.setMovieSession(movieSession);
         ticketDao.add(ticket);
         ShoppingCart shoppingCart = getByUser(user);
-        shoppingCart.setTickets(List.of(ticket));
+        shoppingCart.getTickets().add(ticket);
         shoppingCartDao.update(shoppingCart);
     }
 
@@ -44,6 +43,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void clear(ShoppingCart shoppingCart) {
-        shoppingCartDao.clear(shoppingCart);
+        shoppingCart.setTickets(null);
+        shoppingCartDao.update(shoppingCart);
     }
 }

@@ -51,18 +51,6 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     @Override
-    public void clear(ShoppingCart shoppingCart) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<ShoppingCart> query = session.createQuery("UPDATE ShoppingCart s "
-                    + "set s.tickets = null WHERE s.id = :id");
-            query.setParameter("id", shoppingCart.getId());
-        } catch (Exception e) {
-            throw new DataProcessingException("Can't clear shoppingCart with id = "
-                    + shoppingCart.getId(), e);
-        }
-    }
-
-    @Override
     public void update(ShoppingCart shoppingCart) {
         Transaction transaction = null;
         Session session = null;
