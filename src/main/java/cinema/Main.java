@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Main {
     private static Injector injector = Injector.getInstance("cinema");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AuthenticationException {
         MovieService movieService = (MovieService) injector
                 .getInstance(MovieService.class);
         Movie movie1 = new Movie();
@@ -59,15 +59,15 @@ public class Main {
             e.printStackTrace();
         }
         User user1 = new User();
-        user1.setEmail("sjfakljsflaks");
+        user1.setEmail("sjfakljsfla");
         user1.setPassword("qwerty123");
         UserService userService = (UserService) injector
                 .getInstance(UserService.class);
-        userService.add(user1);
+        authenticationService.register(user1.getEmail(), user1.getPassword());
         ShoppingCartService shoppingCartService = (ShoppingCartService) injector
                 .getInstance(ShoppingCartService.class);
-        shoppingCartService.registerNewShoppingCart(user1);
-        shoppingCartService.addSession(movieSession, user1);
+        shoppingCartService.addSession(movieSession,
+                authenticationService.login(user1.getEmail(), user1.getPassword()));
         System.out.println(shoppingCartService.getByUser(user1));
     }
 }

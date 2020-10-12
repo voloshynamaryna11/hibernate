@@ -1,6 +1,7 @@
 package cinema.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +14,7 @@ public class Ticket {
     private Long id;
     @ManyToOne
     private MovieSession movieSession;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     public Long getId() {
