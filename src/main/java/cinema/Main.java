@@ -5,10 +5,13 @@ import cinema.lib.Injector;
 import cinema.model.CinemaHall;
 import cinema.model.Movie;
 import cinema.model.MovieSession;
+import cinema.model.User;
 import cinema.security.AuthenticationService;
 import cinema.service.CinemaHallService;
 import cinema.service.MovieService;
 import cinema.service.MovieSessionService;
+import cinema.service.ShoppingCartService;
+import cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -55,5 +58,16 @@ public class Main {
         } catch (AuthenticationException e) {
             e.printStackTrace();
         }
+        User user1 = new User();
+        user1.setEmail("sjfakljsflaks");
+        user1.setPassword("qwerty123");
+        UserService userService = (UserService) injector
+                .getInstance(UserService.class);
+        userService.add(user1);
+        ShoppingCartService shoppingCartService = (ShoppingCartService) injector
+                .getInstance(ShoppingCartService.class);
+        shoppingCartService.registerNewShoppingCart(user1);
+        shoppingCartService.addSession(movieSession, user1);
+        System.out.println(shoppingCartService.getByUser(user1));
     }
 }
