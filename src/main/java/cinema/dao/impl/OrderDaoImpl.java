@@ -46,7 +46,8 @@ public class OrderDaoImpl implements OrderDao {
             orderQuery.setParameter("userId", user.getId());
             return orderQuery.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Can't find available orders", e);
+            throw new RuntimeException("Can't find available orders associated with email = "
+                    + user.getEmail(), e);
         }
     }
 }
