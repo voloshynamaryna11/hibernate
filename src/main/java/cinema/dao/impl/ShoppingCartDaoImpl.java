@@ -1,6 +1,5 @@
 package cinema.dao.impl;
 
-import cinema.Main;
 import cinema.dao.ShoppingCartDao;
 import cinema.exceptions.DataProcessingException;
 import cinema.lib.Dao;
@@ -14,7 +13,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(ShoppingCartDaoImpl.class);
 
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
@@ -64,6 +63,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             transaction = session.beginTransaction();
             session.saveOrUpdate(shoppingCart);
             transaction.commit();
+            logger.info("Success! shoppingCart updated already in DB");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();

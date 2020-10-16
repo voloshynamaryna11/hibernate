@@ -63,7 +63,7 @@ public class Main {
                     .login("maryna.voloshyna.11@gmail.com",
                             "qwerty123"));
         } catch (AuthenticationException e) {
-            e.printStackTrace();
+            logger.warn("Authentication failed", e);
         }
         User user1 = new User();
         user1.setEmail("sjfakljsfla");

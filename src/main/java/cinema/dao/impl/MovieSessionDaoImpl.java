@@ -1,6 +1,5 @@
 package cinema.dao.impl;
 
-import cinema.Main;
 import cinema.dao.MovieSessionDao;
 import cinema.exceptions.DataProcessingException;
 import cinema.lib.Dao;
@@ -16,7 +15,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {

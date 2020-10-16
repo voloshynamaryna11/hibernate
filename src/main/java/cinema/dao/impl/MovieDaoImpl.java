@@ -1,6 +1,5 @@
 package cinema.dao.impl;
 
-import cinema.Main;
 import cinema.dao.MovieDao;
 import cinema.exceptions.DataProcessingException;
 import cinema.lib.Dao;
@@ -14,7 +13,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(MovieDaoImpl.class);
 
     public Movie add(Movie movie) {
         Transaction transaction = null;

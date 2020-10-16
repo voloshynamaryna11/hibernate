@@ -1,6 +1,5 @@
 package cinema.dao.impl;
 
-import cinema.Main;
 import cinema.dao.UserDao;
 import cinema.exceptions.DataProcessingException;
 import cinema.lib.Dao;
@@ -14,7 +13,7 @@ import org.hibernate.query.Query;
 
 @Dao
 public class UserDaoImpl implements UserDao {
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
 
     @Override
     public User add(User user) {
