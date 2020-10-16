@@ -1,17 +1,21 @@
 package cinema.dao.impl;
 
+import cinema.Main;
 import cinema.dao.MovieDao;
 import cinema.exceptions.DataProcessingException;
 import cinema.lib.Dao;
 import cinema.model.Movie;
 import cinema.util.HibernateUtil;
 import java.util.List;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 @Dao
 public class MovieDaoImpl implements MovieDao {
+    private static final Logger logger = Logger.getLogger(Main.class);
+
     public Movie add(Movie movie) {
         Transaction transaction = null;
         Session session = null;
@@ -20,6 +24,7 @@ public class MovieDaoImpl implements MovieDao {
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
+            logger.info("Success! movie object already in DB");
             return movie;
         } catch (Exception e) {
             if (transaction != null) {

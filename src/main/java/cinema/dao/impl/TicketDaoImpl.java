@@ -1,15 +1,19 @@
 package cinema.dao.impl;
 
+import cinema.Main;
 import cinema.dao.TicketDao;
 import cinema.exceptions.DataProcessingException;
 import cinema.lib.Dao;
 import cinema.model.Ticket;
 import cinema.util.HibernateUtil;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Dao
 public class TicketDaoImpl implements TicketDao {
+    private static final Logger logger = Logger.getLogger(Main.class);
+
     @Override
     public Ticket add(Ticket ticket) {
         Transaction transaction = null;
@@ -19,6 +23,7 @@ public class TicketDaoImpl implements TicketDao {
             transaction = session.beginTransaction();
             session.save(ticket);
             transaction.commit();
+            logger.info("Success! ticket object already in DB");
             return ticket;
         } catch (Exception e) {
             if (transaction != null) {
