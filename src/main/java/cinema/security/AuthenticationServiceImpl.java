@@ -1,6 +1,5 @@
 package cinema.security;
 
-import cinema.Main;
 import cinema.exceptions.AuthenticationException;
 import cinema.lib.Inject;
 import cinema.lib.Service;
@@ -13,7 +12,7 @@ import org.apache.log4j.Logger;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private static final Logger logger = Logger.getLogger(Main.class);
+    private static final Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
 
     @Inject
     private UserService userService;
