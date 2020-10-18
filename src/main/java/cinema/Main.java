@@ -15,8 +15,10 @@ import cinema.service.ShoppingCartService;
 import cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import org.apache.log4j.Logger;
 
 public class Main {
+    private static final Logger logger = Logger.getLogger(Main.class);
     private static Injector injector = Injector.getInstance("cinema");
 
     public static void main(String[] args) throws AuthenticationException {
@@ -30,14 +32,14 @@ public class Main {
         movie2.setTitle("Interstellar");
         movie2.setDescription("Science fiction");
         movieService.add(movie2);
-        movieService.getAll().stream().forEach(System.out::println);
+        movieService.getAll().stream().forEach(logger::info);
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(20);
         cinemaHall.setDescription("Black hall");
         CinemaHallService cinemaHallService = (CinemaHallService) injector
                 .getInstance(CinemaHallService.class);
         cinemaHallService.add(cinemaHall);
-        System.out.println(cinemaHallService.getAll());
+        logger.info("Get all available cinema halls" + cinemaHallService.getAll());
         MovieSession movieSession = new MovieSession();
         movieSession.setCinemaHall(cinemaHall);
         movieSession.setMovie(movie1);
@@ -47,17 +49,21 @@ public class Main {
                 .getInstance(MovieSessionService.class);
         movieSessionService.add(movieSession);
         LocalDate localDate = LocalDate.of(2020, 10, 8);
-        System.out.println(movieSessionService.findAvailableSessions(1L, localDate));
+        logger.info("find available sessions with movieId = "
+                + movie1.getId() + "and localDate = " + localDate.toString()
+                + movieSessionService.findAvailableSessions(1L, localDate));
         AuthenticationService authenticationService = (AuthenticationService) injector
                 .getInstance(AuthenticationService.class);
         authenticationService.register("maryna.voloshyna.11@gmail.com",
                 "qwerty123");
         try {
-            System.out.println(authenticationService
+            logger.info("trying to get access to user with email = "
+                    + "maryna.voloshyna.11@gmail.com"
+                    + authenticationService
                     .login("maryna.voloshyna.11@gmail.com",
                             "qwerty123"));
         } catch (AuthenticationException e) {
-            e.printStackTrace();
+            logger.warn("Authentication failed", e);
         }
         User user1 = new User();
         user1.setEmail("sjfakljsfla");
@@ -71,8 +77,9 @@ public class Main {
                 authenticationService.login(user1.getEmail(), user1.getPassword()));
         ShoppingCart shoppingCart = shoppingCartService
                 .getByUser(userService.findByEmail(user1.getEmail()).get());
-        System.out.println(shoppingCart);
+        logger.info("get shopping cart before clearing by user email = "
+                + user1.getEmail() + shoppingCart);
         shoppingCartService.clear(shoppingCart);
-        System.out.println(shoppingCart);
+        logger.info("get the same shoppingCart after clearing");
     }
 }
