@@ -7,7 +7,6 @@ import cinema.model.ShoppingCart;
 import cinema.model.Ticket;
 import cinema.model.User;
 import cinema.service.ShoppingCartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,12 +14,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private ShoppingCartDao shoppingCartDao;
     private TicketDao ticketDao;
 
-    @Autowired
-    public ShoppingCartServiceImpl(ShoppingCartDao shoppingCartDao) {
+    public ShoppingCartServiceImpl(ShoppingCartDao shoppingCartDao, TicketDao ticketDao) {
         this.shoppingCartDao = shoppingCartDao;
-    }
-
-    public ShoppingCartServiceImpl(TicketDao ticketDao) {
         this.ticketDao = ticketDao;
     }
 
