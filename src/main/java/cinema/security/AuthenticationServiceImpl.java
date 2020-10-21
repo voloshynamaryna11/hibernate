@@ -1,24 +1,30 @@
 package cinema.security;
 
 import cinema.exceptions.AuthenticationException;
-import cinema.lib.Inject;
-import cinema.lib.Service;
 import cinema.model.User;
 import cinema.service.ShoppingCartService;
 import cinema.service.UserService;
 import cinema.util.HashUtil;
 import java.util.Optional;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private static final Logger logger = Logger.getLogger(AuthenticationServiceImpl.class);
-
-    @Inject
     private UserService userService;
-
-    @Inject
     private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    public AuthenticationServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public AuthenticationServiceImpl(ShoppingCartService shoppingCartService) {
+        this.shoppingCartService = shoppingCartService;
+    }
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
