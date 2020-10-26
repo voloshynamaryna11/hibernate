@@ -3,16 +3,28 @@ package cinema.model.dto;
 import java.time.LocalDateTime;
 
 public class MovieSessionResponseDto {
+    private Long movieSessionId;
     private Long movieId;
     private Long cinemaHallId;
     private LocalDateTime showTime;
     private String movieTitle;
 
-    public MovieSessionResponseDto(Long cinemaHallId,
-                                   LocalDateTime showTime, String movieTitle) {
+    public MovieSessionResponseDto(Long movieSessionId, Long movieId,
+                                   Long cinemaHallId, LocalDateTime showTime,
+                                   String movieTitle) {
+        this.movieSessionId = movieSessionId;
+        this.movieId = movieId;
         this.cinemaHallId = cinemaHallId;
         this.showTime = showTime;
         this.movieTitle = movieTitle;
+    }
+
+    public Long getMovieSessionId() {
+        return movieSessionId;
+    }
+
+    public void setMovieSessionId(Long movieSessionId) {
+        this.movieSessionId = movieSessionId;
     }
 
     public LocalDateTime getShowTime() {

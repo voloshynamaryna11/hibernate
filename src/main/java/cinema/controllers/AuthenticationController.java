@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Controller
+@Controller()
 public class AuthenticationController {
     private AuthenticationService authenticationService;
 
@@ -16,10 +16,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public void register(@RequestBody UserRequestDto userRequestDto) {
-        if (userRequestDto.getPassword()
-                .equals(userRequestDto.getRepeatPassword())) {
-            authenticationService.register(userRequestDto.getEmail(),
-                    userRequestDto.getPassword());
-        }
+        authenticationService.register(userRequestDto.getEmail(),
+                userRequestDto.getPassword());
     }
 }

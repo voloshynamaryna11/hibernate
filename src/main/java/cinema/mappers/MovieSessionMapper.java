@@ -9,53 +9,27 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieSessionMapper {
-    private MovieSession movieSession;
-    private MovieSessionRequestDto movieSessionRequestDto;
-    private MovieSessionResponseDto movieSessionResponseDto;
 
-    public MovieSession getMovieSession() {
-        return movieSession;
-    }
-
-    public void setMovieSession(MovieSession movieSession) {
-        this.movieSession = movieSession;
-    }
-
-    public MovieSessionRequestDto getMovieSessionRequestDto() {
-        return movieSessionRequestDto;
-    }
-
-    public void setMovieSessionRequestDto(MovieSessionRequestDto movieSessionRequestDto) {
-        this.movieSessionRequestDto = movieSessionRequestDto;
-    }
-
-    public MovieSessionResponseDto getMovieSessionResponseDto() {
-        return movieSessionResponseDto;
-    }
-
-    public void setMovieSessionResponseDto(MovieSessionResponseDto movieSessionResponseDto) {
-        this.movieSessionResponseDto = movieSessionResponseDto;
-    }
-
-    public MovieSessionResponseDto mapFromMovieSessionToMovieSessionResponseDto() {
-        this.setMovieSessionResponseDto(new MovieSessionResponseDto(this
-                .getMovieSession().getCinemaHall().getId(),
-                this.getMovieSession().getShowTime(),
-                this.getMovieSession().getMovie().getTitle()));
-        return this.getMovieSessionResponseDto();
+    public MovieSessionResponseDto mapFromMovieSessionToMovieSessionResponseDto(
+            MovieSession movieSession) {
+        return new MovieSessionResponseDto(movieSession.getId(),
+                movieSession.getMovie().getId(),
+                movieSession.getCinemaHall().getId(),
+                movieSession.getShowTime(),
+                movieSession.getMovie().getTitle());
     }
 
     public MovieSession mapFromMovieSessionRequestDtoToMovieSession(
+            MovieSessionRequestDto movieSessionRequestDto,
             MovieService movieService, CinemaHallService cinemaHallService) {
         MovieSession movieSession = new MovieSession();
-        movieSession.setMovie(movieService.getAll()
-                .stream()
+        movieSession.setMovie(movieService.getAll().stream()
                 .filter(movie -> movie.getId() == movieSessionRequestDto.getMovieId())
-                .findFirst().get());
+                .findAny().get());
         movieSession.setCinemaHall(cinemaHallService.getAll().stream()
                 .filter(cinemaHall -> cinemaHall.getId() == movieSessionRequestDto
                         .getCinemaHallId())
-                .findFirst().get());
+                .findAny().get());
         movieSession.setShowTime(movieSessionRequestDto.getShowTime());
         return movieSession;
     }
