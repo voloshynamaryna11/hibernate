@@ -13,10 +13,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/movie-sessions")
 public class MovieSessionController {
     private MovieSessionService movieSessionService;
     private MovieService movieService;
@@ -33,14 +35,14 @@ public class MovieSessionController {
         this.mapper = mapper;
     }
 
-    @PostMapping("/movie-sessions")
+    @PostMapping
     public void add(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
         movieSessionService.add(mapper
                 .mapFromMovieSessionRequestDtoToMovieSession(movieSessionRequestDto,
                         movieService, cinemaHallService));
     }
 
-    @GetMapping("/movie-sessions/available")
+    @GetMapping("/available")
     public List<MovieSessionResponseDto> getAllAvailable(@RequestParam Long movieId,
                                                          @RequestParam
                                                          @DateTimeFormat(iso =
