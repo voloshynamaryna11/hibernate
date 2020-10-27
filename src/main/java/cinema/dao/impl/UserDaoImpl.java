@@ -56,4 +56,16 @@ public class UserDaoImpl implements UserDao {
                     + email, e);
         }
     }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<User> query = session.createQuery("FROM User WHERE id = :id", User.class);
+            query.setParameter("id", id);
+            return query.uniqueResultOptional();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't find available account with id = "
+                    + id, e);
+        }
+    }
 }
