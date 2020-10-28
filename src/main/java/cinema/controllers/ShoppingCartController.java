@@ -31,12 +31,12 @@ public class ShoppingCartController {
     @PostMapping("/movie-sessions")
     public void add(@RequestParam Long userId, @RequestParam Long movieSessionId) {
         shoppingCartService.addSession(sessionService
-                .findById(movieSessionId), userService.findById(userId));
+                .get(movieSessionId), userService.get(userId));
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getByUser(@RequestParam Long userId) {
         return mapper.mapFromShoppingCartToShoppingCartResponseDto(
-                shoppingCartService.getByUser(userService.findById(userId)));
+                shoppingCartService.getByUser(userService.get(userId)));
     }
 }

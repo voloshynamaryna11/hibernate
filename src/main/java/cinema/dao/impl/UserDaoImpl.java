@@ -60,9 +60,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Optional<User> findById(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            Query<User> query = session.createQuery("FROM User WHERE id = :id", User.class);
-            query.setParameter("id", id);
-            return query.uniqueResultOptional();
+            return Optional.ofNullable(session.get(User.class, id));
         } catch (Exception e) {
             throw new DataProcessingException("Can't find available account with id = "
                     + id, e);
