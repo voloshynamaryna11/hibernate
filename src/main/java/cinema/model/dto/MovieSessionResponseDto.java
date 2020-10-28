@@ -9,16 +9,6 @@ public class MovieSessionResponseDto {
     private LocalDateTime showTime;
     private String movieTitle;
 
-    public MovieSessionResponseDto(Long movieSessionId, Long movieId,
-                                   Long cinemaHallId, LocalDateTime showTime,
-                                   String movieTitle) {
-        this.movieSessionId = movieSessionId;
-        this.movieId = movieId;
-        this.cinemaHallId = cinemaHallId;
-        this.showTime = showTime;
-        this.movieTitle = movieTitle;
-    }
-
     public Long getMovieSessionId() {
         return movieSessionId;
     }

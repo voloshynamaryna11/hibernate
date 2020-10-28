@@ -1,6 +1,7 @@
 package cinema.mappers;
 
 import cinema.model.ShoppingCart;
+import cinema.model.Ticket;
 import cinema.model.dto.ShoppingCartResponseDto;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
@@ -9,22 +10,10 @@ import org.springframework.stereotype.Component;
 public class ShoppingCartMapper {
     public ShoppingCartResponseDto mapFromShoppingCartToShoppingCartResponseDto(
             ShoppingCart shoppingCart) {
-        return new ShoppingCartResponseDto(shoppingCart.getId(),
-                shoppingCart.getUser().getId(), shoppingCart.getUser().getEmail(),
-                shoppingCart.getTickets().stream()
-                        .map(ticket -> ticket.getId())
-                        .collect(Collectors.toList()),
-                shoppingCart.getTickets().stream()
-                        .map(ticket -> ticket.getMovieSession().getId())
-                        .collect(Collectors.toList()),
-                shoppingCart.getTickets().stream()
-                        .map(ticket -> ticket.getMovieSession().getMovie().getTitle())
-                        .collect(Collectors.toList()),
-                shoppingCart.getTickets().stream()
-                        .map(ticket -> ticket.getMovieSession().getShowTime())
-                        .collect(Collectors.toList()),
-                shoppingCart.getTickets().stream()
-                        .map(ticket -> ticket.getMovieSession().getCinemaHall().getId())
-                        .collect(Collectors.toList()));
+        ShoppingCartResponseDto responseDto = new ShoppingCartResponseDto();
+        responseDto.setUserId(shoppingCart.getUser().getId());
+        responseDto.setTicketsId(shoppingCart.getTickets().stream()
+                .map(Ticket::getId).collect(Collectors.toList()));
+        return responseDto;
     }
 }

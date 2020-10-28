@@ -27,7 +27,7 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
         try (Session session = sessionFactory.openSession()) {
             Query<MovieSession> findAvailableSessionsQuery = session
                     .createQuery("FROM MovieSession WHERE movie.id = :movieId "
-                            + "AND showTime BETWEEN :start AND :end",
+                                    + "AND showTime BETWEEN :start AND :end",
                             MovieSession.class);
             findAvailableSessionsQuery.setParameter("movieId", movieId);
             findAvailableSessionsQuery.setParameter("start", date.atTime(LocalTime.MIN));
@@ -59,6 +59,19 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             if (session != null) {
                 session.close();
             }
+        }
+    }
+
+    @Override
+    public MovieSession findById(Long movieSessionId) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<MovieSession> query = session.createQuery(
+                    "FROM MovieSession WHERE id = :movieSessionId");
+            query.setParameter("movieSessionId", movieSessionId);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't find movieSession by id = "
+                    + movieSessionId, e);
         }
     }
 }

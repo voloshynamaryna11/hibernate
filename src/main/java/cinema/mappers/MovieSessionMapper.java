@@ -12,11 +12,13 @@ public class MovieSessionMapper {
 
     public MovieSessionResponseDto mapFromMovieSessionToMovieSessionResponseDto(
             MovieSession movieSession) {
-        return new MovieSessionResponseDto(movieSession.getId(),
-                movieSession.getMovie().getId(),
-                movieSession.getCinemaHall().getId(),
-                movieSession.getShowTime(),
-                movieSession.getMovie().getTitle());
+        MovieSessionResponseDto responseDto = new MovieSessionResponseDto();
+        responseDto.setCinemaHallId(movieSession.getCinemaHall().getId());
+        responseDto.setMovieId(movieSession.getMovie().getId());
+        responseDto.setMovieSessionId(movieSession.getId());
+        responseDto.setMovieTitle(movieSession.getMovie().getTitle());
+        responseDto.setShowTime(movieSession.getShowTime());
+        return responseDto;
     }
 
     public MovieSession mapFromMovieSessionRequestDtoToMovieSession(
