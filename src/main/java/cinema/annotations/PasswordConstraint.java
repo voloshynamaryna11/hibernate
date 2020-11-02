@@ -1,6 +1,5 @@
 package cinema.annotations;
 
-import cinema.validation.PasswordValidator;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

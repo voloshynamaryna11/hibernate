@@ -1,6 +1,5 @@
-package cinema.validation;
+package cinema.annotations;
 
-import cinema.annotations.EmailConstraint;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -8,7 +7,6 @@ public class EmailValidator implements ConstraintValidator<EmailConstraint, Stri
     @Override
     public boolean isValid(String email,
                            ConstraintValidatorContext constraintValidatorContext) {
-
         return email != null && email.length() > 8
                 && email.length() < 50
                 && org.apache.commons.validator.routines.EmailValidator

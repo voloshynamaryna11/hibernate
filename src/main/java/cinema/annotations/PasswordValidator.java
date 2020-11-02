@@ -1,6 +1,5 @@
-package cinema.validation;
+package cinema.annotations;
 
-import cinema.annotations.PasswordConstraint;
 import cinema.model.dto.UserRequestDto;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
