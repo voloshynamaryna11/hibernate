@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers,
@@ -30,4 +31,5 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         map.put("errors", errors);
         return new ResponseEntity<>(map, headers, status);
     }
+
 }
