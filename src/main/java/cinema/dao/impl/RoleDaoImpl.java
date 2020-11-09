@@ -44,8 +44,7 @@ public class RoleDaoImpl implements RoleDao {
         try (Session session = sessionFactory.openSession()) {
             Query<Role> findByEmailQuery = session.createQuery("FROM Role"
                     + " WHERE roleName = :name", Role.class);
-            findByEmailQuery.setParameter("name", roleName == "ADMIN"
-                    ? Role.RoleName.ADMIN : Role.RoleName.USER);
+            findByEmailQuery.setParameter("name", Role.RoleName.valueOf(roleName));
             return findByEmailQuery.getSingleResult();
         } catch (Exception e) {
             throw new DataProcessingException("Can't find available role with name = "

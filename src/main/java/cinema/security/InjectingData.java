@@ -10,14 +10,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class InjectData {
+public class InjectingData {
     private UserService userService;
     private RoleService roleService;
     private PasswordEncoder passwordEncoder;
 
-    public InjectData(UserService userService,
-                      RoleService roleService,
-                      PasswordEncoder passwordEncoder) {
+    public InjectingData(UserService userService,
+                         RoleService roleService,
+                         PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
