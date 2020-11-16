@@ -2,10 +2,9 @@ package cinema.service;
 
 import cinema.model.User;
 import java.util.Optional;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 public interface UserService {
-    User add(User user, PasswordEncoder passwordEncoder);
+    User add(User user);
 
     Optional<User> findByEmail(String email);
 

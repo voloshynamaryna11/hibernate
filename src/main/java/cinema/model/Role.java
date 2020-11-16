@@ -15,6 +15,13 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
 
+    public Role() {
+    }
+
+    private Role(RoleName roleName) {
+        this.roleName = roleName;
+    }
+
     public Long getId() {
         return id;
     }
@@ -29,6 +36,10 @@ public class Role {
 
     public void setRoleName(RoleName roleName) {
         this.roleName = roleName;
+    }
+
+    public static Role of(String roleName) {
+        return new Role(RoleName.valueOf(roleName));
     }
 
     public enum RoleName {

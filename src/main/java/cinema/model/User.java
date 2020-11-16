@@ -1,13 +1,12 @@
 package cinema.model;
 
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import org.checkerframework.common.aliasing.qual.Unique;
 
 @Entity
@@ -18,7 +17,7 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     private Set<Role> roles;
 
     public User(@Unique String email, String password) {
