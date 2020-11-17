@@ -11,11 +11,6 @@ public class CinemaHallRequestDto {
     @Size(min = 5, message = "Description is incomplete")
     private String description;
 
-    public CinemaHallRequestDto(int capacity, String description) {
-        this.capacity = capacity;
-        this.description = description;
-    }
-
     public int getCapacity() {
         return capacity;
     }
